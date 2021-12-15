@@ -5,3 +5,7 @@ version = 3
 [[package]]
 name = "day01_sonar_sweep"
 version = "0.1.0"
+
+[[package]]
+name = "day01_sonar_sweep_sliding_window"
+version = "0.1.0"
