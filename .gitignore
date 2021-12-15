@@ -6,3 +6,7 @@ target/
 
 # swap files
 *.swp
+
+# input files
+input_real.txt
+input
