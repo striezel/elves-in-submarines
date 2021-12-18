@@ -1,30 +1,15 @@
-use std::fs::File;
-use std::io::{self, BufRead};
+use basic::*;
 use std::path::PathBuf;
 use crate::slider::Slider;
 
 mod sliding_window;
 mod slider;
 
-fn read_lines_from_file(p: PathBuf) -> io::Result<io::Lines<io::BufReader<File>>>
-{
-    let file = File::open(p)?;
-    Ok(io::BufReader::new(file).lines())
-}
-
 fn main() {
     println!("Day 01: Sonar sweep with sliding windows - count depth increases");
 
-    let args: Vec<String> = std::env::args().collect();
-    let file_name = if args.len() > 1
-    {
-        &args[1]
-    }
-    else
-    {
-        "input.txt"
-    };
-    let lines = read_lines_from_file(PathBuf::from(file_name));
+    let file_name = get_input_name();
+    let lines = read_lines_from_file(PathBuf::from(&file_name));
     if lines.is_err()
     {
         eprintln!("Error: Could not read input from file {}!", file_name);

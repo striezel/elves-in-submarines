@@ -1,26 +1,11 @@
-use std::fs::File;
-use std::io::{self, BufRead};
 use std::path::PathBuf;
-
-fn read_lines_from_file(p: PathBuf) -> io::Result<io::Lines<io::BufReader<File>>>
-{
-    let file = File::open(p)?;
-    Ok(io::BufReader::new(file).lines())
-}
+use basic::*;
 
 fn main() {
     println!("Day 03: Binary diagnostic");
 
-    let args: Vec<String> = std::env::args().collect();
-    let file_name = if args.len() > 1
-    {
-        &args[1]
-    }
-    else
-    {
-        "input.txt"
-    };
-    let lines = read_lines_from_file(PathBuf::from(file_name));
+    let file_name = get_input_name();
+    let lines = read_lines_from_file(PathBuf::from(&file_name));
     if lines.is_err()
     {
         eprintln!("Error: Could not read input from file {}!", file_name);

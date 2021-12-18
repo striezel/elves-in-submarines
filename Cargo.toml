@@ -1,5 +1,6 @@
 [workspace]
 members = [
+  "basic",
   "day01_sonar_sweep",
   "day01_sonar_sweep_sliding_window",
   "day02_dive",

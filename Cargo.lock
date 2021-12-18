@@ -3,21 +3,40 @@
 version = 3
 
 [[package]]
-name = "day01_sonar_sweep"
+name = "basic"
 version = "0.1.0"
+
+[[package]]
+name = "day01_sonar_sweep"
+version = "0.2.0"
+dependencies = [
+ "basic",
+]
 
 [[package]]
 name = "day01_sonar_sweep_sliding_window"
-version = "0.1.0"
+version = "0.2.0"
+dependencies = [
+ "basic",
+]
 
 [[package]]
 name = "day02_dive"
-version = "0.1.0"
+version = "0.2.0"
+dependencies = [
+ "basic",
+]
 
 [[package]]
 name = "day02_dive_with_aim"
-version = "0.1.0"
+version = "0.2.0"
+dependencies = [
+ "basic",
+]
 
 [[package]]
 name = "day03_binary_diagnostic"
-version = "0.1.0"
+version = "0.2.0"
+dependencies = [
+ "basic",
+]
