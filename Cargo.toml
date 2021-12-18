@@ -6,4 +6,5 @@ members = [
   "day02_dive",
   "day02_dive_with_aim",
   "day03_binary_diagnostic",
+  "libday03",
 ]

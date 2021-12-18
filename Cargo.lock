@@ -39,4 +39,9 @@ name = "day03_binary_diagnostic"
 version = "0.2.0"
 dependencies = [
  "basic",
+ "libday03",
 ]
+
+[[package]]
+name = "libday03"
+version = "0.1.0"

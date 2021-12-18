@@ -1,5 +1,6 @@
 use std::path::PathBuf;
 use basic::*;
+use libday03::DiagnosticReport;
 
 fn main() {
     println!("Day 03: Binary diagnostic");
@@ -11,49 +12,13 @@ fn main() {
         eprintln!("Error: Could not read input from file {}!", file_name);
         return;
     }
-    let lines = lines.unwrap();
-    let mut width: Option<usize>  = None;
-    let mut data: Vec<u32> = Vec::new();
-    for l in lines
-    {
-        if let Ok(line) = l
-        {
-            if width.is_none()
-            {
-                width = Some(line.len());
-                if width.unwrap() > 32
-                {
-                    eprintln!("Error: Cannot handle more than 32 binary digits per number!");
-                    return;
-                }
-            }
-            if line.len() != width.unwrap()
-            {
-                eprintln!("Error: Line length is not {} characters!", width.unwrap());
-                return;
-            }
-            let current_number = u32::from_str_radix(&line, 2);
-            if current_number.is_err()
-            {
-                eprintln!("Error: Could not parse input '{}' as binary number!", &line);
-                return;
-            }
-            let current_number = current_number.unwrap();
-            data.push(current_number);
-        }
-    }
+    let report = DiagnosticReport::from_lines(lines);
 
     let mut gamma = String::new();
     let mut epsilon = String::new();
-    let threshold = data.len() / 2 + 1;
-    for i in 0..width.unwrap() {
-        let mut count_of_ones = 0;
-        for num in data.iter() {
-            if num & (1 << i) != 0
-            {
-                count_of_ones += 1;
-            }
-        }
+    let threshold = report.majority_threshold();
+    for i in 0..report.width() {
+        let count_of_ones = report.count_ones(i);
         if count_of_ones >= threshold
         {
             gamma.insert(0, '1');
