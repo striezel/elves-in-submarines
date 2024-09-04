@@ -8,3 +8,4 @@ members = [
   "day03_binary_diagnostic",
   "libday03",
 ]
+resolver = "2"
