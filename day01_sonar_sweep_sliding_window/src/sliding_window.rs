@@ -19,12 +19,9 @@ impl SlidingWindow {
   pub fn sum(&self) -> i32
   {
     let mut sum = 0;
-    for element in self.data.iter()
+    for element in self.data.iter().flatten()
     {
-      if let Some(value) = element
-      {
-        sum += value;
-      }
+      sum += element;
     }
     sum
   }

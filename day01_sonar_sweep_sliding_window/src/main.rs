@@ -17,19 +17,16 @@ fn main() {
     }
     let lines = lines.unwrap();
     let mut slider = Slider::new();
-    for l in lines
+    for line in lines.flatten()
     {
-        if let Ok(line) = l
+        let current_number = line.parse::<i32>();
+        if current_number.is_err()
         {
-            let current_number = line.parse::<i32>();
-            if current_number.is_err()
-            {
-                eprintln!("Error: Could not parse input '{}' as number!", &line);
-                return;
-            }
-            let current_number = current_number.unwrap();
-            slider.data(current_number);
+            eprintln!("Error: Could not parse input '{}' as number!", &line);
+            return;
         }
+        let current_number = current_number.unwrap();
+        slider.data(current_number);
     }
 
     println!("Depth values of sliding windows in {} have increased {} time(s).",
