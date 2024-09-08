@@ -14,26 +14,23 @@ fn main() {
     let lines = lines.unwrap();
     let mut previous: Option<i32>  = None;
     let mut increase_count: usize = 0;
-    for l in lines
+    for line in lines.flatten()
     {
-        if let Ok(line) = l
+        let current_number = line.parse::<i32>();
+        if current_number.is_err()
         {
-            let current_number = line.parse::<i32>();
-            if current_number.is_err()
-            {
-                eprintln!("Error: Could not parse input '{}' as number!", &line);
-                return;
-            }
-            let current_number = current_number.unwrap();
-            if let Some(prev) = previous
-            {
-                if prev < current_number
-                {
-                    increase_count += 1;
-                }
-            }
-            previous = Some(current_number);
+            eprintln!("Error: Could not parse input '{}' as number!", &line);
+            return;
         }
+        let current_number = current_number.unwrap();
+        if let Some(prev) = previous
+        {
+            if prev < current_number
+            {
+                increase_count += 1;
+            }
+        }
+        previous = Some(current_number);
     }
 
     println!("Depth values in {} have increased {} time(s).", &file_name, increase_count)
