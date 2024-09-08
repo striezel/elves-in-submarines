@@ -14,32 +14,29 @@ fn main() {
     let lines = lines.unwrap();
     let mut depth = 0;
     let mut horizontal = 0;
-    for l in lines
+    for line in lines.flatten()
     {
-        if let Ok(line) = l
+        let parts: Vec<&str> = line.split_whitespace().collect();
+        if parts.len() != 2
         {
-            let parts: Vec<&str> = line.split_whitespace().collect();
-            if parts.len() != 2
-            {
-                eprintln!("Error: Invalid input '{}' encountered!", &line);
+            eprintln!("Error: Invalid input '{}' encountered!", &line);
+            return;
+        }
+        let number = parts[1].parse::<i32>();
+        if number.is_err()
+        {
+            eprintln!("Error: Could not parse input '{}' as number!", &parts[1]);
+            return;
+        }
+        let number = number.unwrap();
+        match parts[0]
+        {
+            "forward" => horizontal += number,
+            "down" => depth += number,
+            "up" => depth -= number,
+            _ => {
+                eprintln!("Error: '{}' is not a valid movement direction!", &parts[0]);
                 return;
-            }
-            let number = parts[1].parse::<i32>();
-            if number.is_err()
-            {
-                eprintln!("Error: Could not parse input '{}' as number!", &parts[1]);
-                return;
-            }
-            let number = number.unwrap();
-            match parts[0]
-            {
-                "forward" => horizontal += number,
-                "down" => depth += number,
-                "up" => depth -= number,
-                _ => {
-                    eprintln!("Error: '{}' is not a valid movement direction!", &parts[0]);
-                    return;
-                }
             }
         }
     }
