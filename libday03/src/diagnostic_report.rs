@@ -18,30 +18,27 @@ impl DiagnosticReport
     let lines = lines.unwrap();
     let mut width: Option<usize>  = None;
     let mut data: Vec<u32> = Vec::new();
-    for l in lines
+    for line in lines.flatten()
     {
-      if let Ok(line) = l
+      if width.is_none()
       {
-        if width.is_none()
+        width = Some(line.len());
+        if width.unwrap() > 32
         {
-          width = Some(line.len());
-          if width.unwrap() > 32
-          {
-            panic!("Error: Cannot handle more than 32 binary digits per number!");
-          }
+          panic!("Error: Cannot handle more than 32 binary digits per number!");
         }
-        if line.len() != width.unwrap()
-        {
-          panic!("Error: Line length is not {} characters!", width.unwrap());
-        }
-        let current_number = u32::from_str_radix(&line, 2);
-        if current_number.is_err()
-        {
-          panic!("Error: Could not parse input '{}' as binary number!", &line);
-        }
-        let current_number = current_number.unwrap();
-        data.push(current_number);
       }
+      if line.len() != width.unwrap()
+      {
+        panic!("Error: Line length is not {} characters!", width.unwrap());
+      }
+      let current_number = u32::from_str_radix(&line, 2);
+      if current_number.is_err()
+      {
+        panic!("Error: Could not parse input '{}' as binary number!", &line);
+      }
+      let current_number = current_number.unwrap();
+      data.push(current_number);
     }
 
     if data.is_empty()
