@@ -25,7 +25,7 @@ fn main() {
                 eprintln!("Error: Invalid input '{}' encountered!", &line);
                 return;
             }
-            let number = i32::from_str_radix(&parts[1], 10);
+            let number = parts[1].parse::<i32>();
             if number.is_err()
             {
                 eprintln!("Error: Could not parse input '{}' as number!", &parts[1]);
@@ -36,7 +36,7 @@ fn main() {
             {
                 "forward" => {
                     horizontal += number;
-                    depth += &aim * number;
+                    depth += aim * number;
                 },
                 "down" => aim += number,
                 "up" => aim -= number,

@@ -41,7 +41,7 @@ impl SlidingWindow {
     for item in self.data.iter().enumerate()
     {
       let (idx, value) = item;
-      if let None = value
+      if value.is_none()
       {
         self.data[idx] = Some(*data);
         return true;

@@ -21,7 +21,7 @@ fn main() {
     {
         if let Ok(line) = l
         {
-            let current_number = i32::from_str_radix(&line, 10);
+            let current_number = line.parse::<i32>();
             if current_number.is_err()
             {
                 eprintln!("Error: Could not parse input '{}' as number!", &line);
